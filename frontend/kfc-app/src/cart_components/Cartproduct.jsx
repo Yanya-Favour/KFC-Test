@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import styles from './cart.module.css';
 import axios from 'axios';
 import { useDispatch } from 'react-redux';
-import { addcartcount, getCart } from '../redux/action';
+import { addcartcount } from '../redux/action';
 import { getProductImage, handleProductImageError } from '../utils/productImage';
 import { formatUGX } from '../utils/currency';
 import { API_BASE_URL } from '../utils/api';
