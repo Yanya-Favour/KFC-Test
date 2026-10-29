@@ -1,6 +1,7 @@
 const express = require("express");
 const connection = require("./Database/db");
 const mongoose = require("mongoose");
+const { seedEmptyCatalogCollections } = require("./scripts/seedData");
 const userAuthRouter = require("./routes/userAuth.route");
 const paymentRouter = require("./routes/paymentIntegrate.route");
 const menuRouter = require("./routes/menu.route");
@@ -61,8 +62,9 @@ const PORT = Number(process.env.PORT) || 8080;
 const startServer = async () => {
   try {
     await connection;
+    await seedEmptyCatalogCollections();
   } catch (error) {
-    console.error("MongoDB connection failed:", error.message);
+    console.error("MongoDB connection or catalog initialization failed:", error.message);
     process.exitCode = 1;
     return;
   }

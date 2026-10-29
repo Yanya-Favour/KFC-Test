@@ -92,7 +92,7 @@ ___
 
 The collection includes the auth, landing, search, menu, and cart endpoints. Run **Login** first to store `authToken` for **Logout**. Payment requests require valid Razorpay credentials configured in `Backend/.env`.
 
-To populate MongoDB with the products currently shown by the website, run `npm run seed` from `Backend`. This upserts the fixture data into `menus`, `favorites`, `featureds`, and `quickbites` without dropping existing records. The website then reads these sections from the API; if the API is unavailable, it no longer substitutes fixture products or a browser-only cart.
+To populate MongoDB with the products currently shown by the website, run `npm run seed` from `Backend`. This upserts the fixture data from `Backend/data/SliderData.json` into `menus`, `favorites`, `featureds`, and `quickbites` without dropping existing records. The hosted backend automatically seeds only empty catalog collections at startup; it does not overwrite collections that already contain data. Keep the backend fixture synchronized with `frontend/kfc-app/src/SliderData.json`. The website reads these sections from the API; if the API is unavailable, it no longer substitutes fixture products or a browser-only cart.
 
 In MongoDB Compass, connect to the same MongoDB instance used by the backend (`mongodb://localhost:27017`) and open the `kfc_clone` database. User signups are stored in `userdetails`, cart entries in `carts`, and catalog/homepage records in the collections listed above. You can set `MONGODB_URI` in `Backend/.env` if your MongoDB instance uses a different connection string.
 
@@ -103,9 +103,9 @@ The frontend is deployed on Vercel and the Express API on Render. The backend ne
 1. Push this project to a **private** GitHub repository. The repository root contains `render.yaml`; the Vercel project root should be `frontend/kfc-app`.
 2. Create a MongoDB Atlas database and database user. Keep the connection string private.
 3. In Render, create a Blueprint from the repository. The API is pinned to Render's Free plan; do not select a paid plan. Set `MONGODB_URI` to the Atlas connection string and deploy the `kfc-api` service. Render generates `JWT_SECRET` from the Blueprint. The API URL will look like `https://kfc-api.onrender.com`.
-4. In Vercel, import the repository with project root `frontend/kfc-app`, build command `npm run build`, and output directory `build`. Add `REACT_APP_API_BASE_URL` with the Render API URL (no trailing slash), then deploy. If using Razorpay, also set `REACT_APP_RAZORPAY_KEY_ID` to its public key.
+4. In Vercel, import the repository with project root `frontend/kfc-app`, build command `CI=false npm run build`, and output directory `build`. Add `REACT_APP_API_BASE_URL` with the Render API URL (no trailing slash), then deploy. If using Razorpay, also set `REACT_APP_RAZORPAY_KEY_ID` to its public key.
 5. Set the Render `FRONTEND_URL` environment variable to the Vercel production URL and redeploy the API. This allows the hosted website through CORS.
-6. Populate the hosted catalog by running the existing seed command against Atlas: set `MONGODB_URI` in `Backend/.env` to the Atlas connection string, then run `npm run seed` from `Backend`. Do not commit the `.env` file.
+6. On the first successful Render startup, the backend seeds any empty catalog collections from `frontend/kfc-app/src/SliderData.json`. No manual Atlas seed step is required. The `npm run seed` command remains available for intentional manual upserts; do not commit a `.env` file.
 
 Authentication and catalog/cart APIs work once these services and environment variables are configured. Payment additionally requires `RAZORPAY_KEY_ID` and `RAZORPAY_KEY_SECRET` on Render and a matching public `REACT_APP_RAZORPAY_KEY_ID` on Vercel. Never put the Razorpay secret in a frontend variable.
 
