@@ -1,0 +1,12 @@
+$kind: http-request
+url: "{{baseUrl}}/api/payment/orders"
+method: POST
+headers:
+  Content-Type: application/json
+body:
+  type: json
+  content: |-
+    {
+      "amount": 10000
+    }
+order: 1000

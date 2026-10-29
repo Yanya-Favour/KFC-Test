@@ -1,0 +1,8 @@
+**/node_modules/
+**/.env
+**/.env.*
+!**/.env.example
+frontend/kfc-app/build/
+frontend/kfc-app/coverage/
+npm-debug.log*
+yarn-debug.log*

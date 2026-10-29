@@ -1,0 +1,17 @@
+$kind: http-request
+url: "{{baseUrl}}/api/productcart/cart"
+method: POST
+headers:
+  Content-Type: application/json
+body:
+  type: json
+  content: |-
+    {
+      "image": "https://example.com/item.jpg",
+      "title": "Test item",
+      "desc": "Test description",
+      "price": "10",
+      "id": "test-item",
+      "qty": 1
+    }
+order: 2000

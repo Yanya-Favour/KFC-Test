@@ -1,0 +1,4 @@
+$kind: http-request
+url: "{{baseUrl}}/api/home/featured"
+method: GET
+order: 2000

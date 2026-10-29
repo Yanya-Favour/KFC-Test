@@ -1,0 +1,6 @@
+$kind: http-request
+url: "{{baseUrl}}/api/searchapi/item?search=chicken"
+method: GET
+queryParams:
+  search: chicken
+order: 3000

@@ -1,0 +1,6 @@
+$kind: http-request
+url: "{{baseUrl}}/Auth/logout"
+method: POST
+headers:
+  token: "{{authToken}}"
+order: 3000

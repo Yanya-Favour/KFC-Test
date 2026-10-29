@@ -1,0 +1,4 @@
+$kind: collection
+description: Local requests for the KFC Clone Express API. Select the Local KFC API environment before sending requests.
+variables:
+  baseUrl: http://localhost:8080

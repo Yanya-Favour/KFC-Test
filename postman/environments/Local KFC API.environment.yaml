@@ -1,0 +1,10 @@
+name: Local KFC API
+values:
+  - key: baseUrl
+    value: 'http://localhost:8080'
+  - key: authToken
+    value: ''
+  - key: menuId
+    value: ''
+  - key: cartId
+    value: ''

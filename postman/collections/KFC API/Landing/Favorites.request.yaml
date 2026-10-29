@@ -1,0 +1,4 @@
+$kind: http-request
+url: "{{baseUrl}}/api/home/favorites"
+method: GET
+order: 1000
